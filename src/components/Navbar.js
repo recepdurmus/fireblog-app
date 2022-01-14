@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { signOut } from 'firebase/auth';
 import { auth } from '../helpers/firebase';
+import { Avatar } from '@mui/material';
+import LoginTwoToneIcon from '@mui/icons-material/LoginTwoTone';
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -48,11 +50,14 @@ const Navbar = () => {
     navigate('/')
   }
 
+  console.log(currentUser)
+
+ 
 
   return (
-    <Box sx={{flexGrow: 1, display:'flex', justifyContent: 'space-between'}}>
-      <AppBar position="static">
-        <Toolbar>
+    <Box >
+      <AppBar position="static" sx={{backgroundColor:'#24292E'}}>
+        <Toolbar sx={{display:'flex', justifyContent: 'space-between'}}>
         
           <IconButton
             size="large"
@@ -61,13 +66,13 @@ const Navbar = () => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <HomeOutlinedIcon onClick={() =>navigate('/')}/>
+            <Avatar sx={{backgroundColor:'#fff', color:'#24292E' }}><HomeOutlinedIcon onClick={() =>navigate('/')}/></Avatar>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign:'center' }}>
+          <Typography position="static" onClick={() =>navigate('/')} variant="h6" component="div" sx={{cursor:'pointer'}}>
             Fire Blog
           </Typography>
-          {(currentUser)? (
-            <div>
+          <Box>{(currentUser)? (
+            <div style={{display:'flex', alignItems:'center'}}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -76,7 +81,9 @@ const Navbar = () => {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+                <Avatar sx={{backgroundColor:'#fff', color:'#24292E' }}>
+                {(currentUser.displayName)?.split(" ").map(str => str[0]).join("").toUpperCase()}
+                </Avatar>
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -108,7 +115,7 @@ const Navbar = () => {
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              <Avatar sx={{backgroundColor:'#fff', color:'#24292E' }}><LoginTwoToneIcon/></Avatar>
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -129,7 +136,8 @@ const Navbar = () => {
               <MenuItem onClick={handleRegister}>Register</MenuItem>
             </Menu>
           </div>
-          )}
+          )}</Box>
+          
         </Toolbar>
       </AppBar>
     </Box>

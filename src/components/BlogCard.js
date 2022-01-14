@@ -1,22 +1,18 @@
-import * as React from "react";
+import React, { useState, useContext  } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Box } from "@mui/material";
+import { useNavigate} from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import img from '../assets/photo.jpg'
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -30,37 +26,37 @@ const ExpandMore = styled((props) => {
 }));
 
 const BlogCard = () => {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      {/* <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
-      /> */}
+    <Card sx={{cursor: "pointer", maxWidth: 345,
+      ':hover': {
+        boxShadow: 20
+      }
+    }}
+    onClick={() => (currentUser)? navigate("/details") : navigate('/')}
+    >
       <CardMedia
         component="img"
         height="140"
         width="350"
-        image={null}
+        image={img}
         alt={null}
+        sx={{ cursor: "pointer"}}
       />
       <CardContent sx={{ padding: 0, width: "350px", whiteSpace: "nowrap" }}>
-        <CardContent sx={{ backgroundColor: "silver" }}>
+        <CardContent
+          sx={{':hover': {
+      boxShadow: 20, // theme.shadows[20]
+    }, cursor: "pointer", backgroundColor: "silver" }}
+        >
           <Typography variant="h5" component="div">
             HEADER
           </Typography>
@@ -79,8 +75,12 @@ const BlogCard = () => {
         </CardContent>
         <CardContent>
           <Typography
-            sx={{ display: "flex", alignItems: "center",textOverflow: "ellipsis",
-            overflow: "hidden" }}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+            }}
             variant="h5"
             component="h2"
           >
