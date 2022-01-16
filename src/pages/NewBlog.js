@@ -93,8 +93,6 @@ const NewBlog = () => {
               </Grid>
               <Grid item xs={12} >
                 <TextField
-
-                //   sx={{height:'40px'}}
                   fullWidth
                   multiline
                   inputProps={{

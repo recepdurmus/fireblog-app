@@ -59,7 +59,6 @@ const Register = () => {
         alert(error.message);
       }
 
-      // setLoading(false);
     },
   });
 
@@ -89,7 +88,7 @@ const Register = () => {
         Register
       </Typography>
       <Formik>
-        {({}) => (
+        {() => (
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={3}>
               <Grid item xs={12}>

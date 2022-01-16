@@ -31,8 +31,6 @@ const Login = () => {
   const navigate = useNavigate();
   const {currentUser} = useContext(AuthContext)
 
-  // const [loading, setLoading] = useState(false);
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -40,7 +38,6 @@ const Login = () => {
     },
     validationSchema: Schema,
     onSubmit: async (values) => {
-      // setLoading(true)
       try {
         let user = await signInWithEmailAndPassword(
           auth,
@@ -52,7 +49,6 @@ const Login = () => {
       } catch (err) {
         alert(err.message);
       }
-      // setLoading(false)
     },
   });
 
