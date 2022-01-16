@@ -4,6 +4,7 @@ import { useFetch } from '../helpers/firebase'
 
 const Dashboard = () => {
     const { cardList } = useFetch()
+    console.log(cardList)
     return (
         <div style={{display: 'flex', justifyContent:'center', flexWrap:'wrap', padding:'3rem' }}>
             {cardList?.map((card) => (

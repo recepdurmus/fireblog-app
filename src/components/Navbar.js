@@ -49,6 +49,8 @@ const Navbar = () => {
     navigate('/')
   }
 
+  console.log(currentUser)
+
 
   return (
     <Box >

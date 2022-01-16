@@ -13,16 +13,6 @@ import { Box } from "@mui/material";
 import { useNavigate} from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
 const BlogCard = ({card}) => {
   const {content, title, imgUrl, email} = card
@@ -45,7 +35,7 @@ const BlogCard = ({card}) => {
     >
       <CardMedia
         component="img"
-        height="140"
+        height="280"
         width="350"
         image={imgUrl}
         alt={imgUrl}
