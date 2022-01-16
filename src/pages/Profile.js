@@ -1,9 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import img from "../assets/photo.jpg";
 import { AuthContext } from "../context/AuthContext";
 import { Avatar } from "@mui/material";
 import { Box } from "@mui/system";
@@ -24,7 +22,6 @@ const Profile = () => {
         </Avatar>
         <CardContent
           sx={{
-            // textAlign: "center",
             padding: 4,
             maxWidth: "400px",
           }}

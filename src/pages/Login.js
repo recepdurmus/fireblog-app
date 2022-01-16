@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { LoginOutlined } from "@mui/icons-material";
 import {
   Container,
@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../helpers/firebase";
+import { AuthContext } from "../context/AuthContext";
 
 const Schema = Yup.object().shape({
   email: Yup.string().email("Invalid Email").required("Email is required"),
@@ -28,6 +29,8 @@ const Schema = Yup.object().shape({
 
 const Login = () => {
   const navigate = useNavigate();
+  const {currentUser} = useContext(AuthContext)
+
   // const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
@@ -53,6 +56,7 @@ const Login = () => {
     },
   });
 
+  console.log(currentUser)
   return (
     <Container
       sx={{
@@ -69,10 +73,10 @@ const Login = () => {
       <Avatar
         sx={{
           margin: "1rem auto",
-          bgcolor: "primary.main",
+          bgcolor: "#4CAF50",
         }}
       >
-        <LoginOutlined />
+        <LoginOutlined sx={{backgroundColor:'#4CAF50'}} />
       </Avatar>
 
       <Typography sx={{ margin: "2rem" }} variant="h4">
@@ -112,7 +116,7 @@ const Login = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Button fullWidth item variant="contained" type="submit">
+                <Button sx={{backgroundColor:'#4CAF50', marginBottom:'1rem'}}  fullWidth item variant="contained" type="submit">
                   Login
                 </Button>
               </Grid>
@@ -128,6 +132,7 @@ const Login = () => {
             fontWeight: "600",
             paddingLeft: "0.5rem",
             cursor: "pointer",
+            color:'#24292E'
           }}
           onClick={() => navigate("/register")}
         >

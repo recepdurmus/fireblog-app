@@ -1,4 +1,4 @@
-import React, { useState, useContext  } from "react";
+import React, { useContext  } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -12,7 +12,6 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Box } from "@mui/material";
 import { useNavigate} from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import img from '../assets/photo.jpg'
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -25,43 +24,44 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const BlogCard = () => {
-  const [expanded, setExpanded] = useState(false);
+const BlogCard = ({card}) => {
+  const {content, title, imgUrl, email} = card
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const detailsfunc = (e) => {
+    console.log(e.target)
+    navigate('/details')
+  }
 
 
   return (
-    <Card sx={{cursor: "pointer", maxWidth: 345,
+    <Card sx={{margin:'1rem', cursor: "pointer", maxWidth: 345,
       ':hover': {
         boxShadow: 20
       }
     }}
-    onClick={() => (currentUser)? navigate("/details") : navigate('/')}
+    onClick={(e) => (currentUser)? detailsfunc(e.target) : navigate('/login')}
     >
       <CardMedia
         component="img"
         height="140"
         width="350"
-        image={img}
-        alt={null}
+        image={imgUrl}
+        alt={imgUrl}
         sx={{ cursor: "pointer"}}
       />
       <CardContent sx={{ padding: 0, width: "350px", whiteSpace: "nowrap" }}>
         <CardContent
           sx={{':hover': {
-      boxShadow: 20, // theme.shadows[20]
+      boxShadow: 20
     }, cursor: "pointer", backgroundColor: "silver" }}
         >
           <Typography variant="h5" component="div">
-            HEADER
+            {title}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            10.01.2022
+          
           </Typography>
           <Box
             component="div"
@@ -70,7 +70,7 @@ const BlogCard = () => {
               overflow: "hidden",
             }}
           >
-            Text Overflow Ellipsis. Text Overflow Ellipsis sşdfsdfsd
+            {content}
           </Box>
         </CardContent>
         <CardContent>
@@ -84,8 +84,8 @@ const BlogCard = () => {
             variant="h5"
             component="h2"
           >
-            <AccountCircle sx={{ marginRight: "0.5rem" }} /> email@email.com
-            {null}
+            <AccountCircle sx={{ marginRight: "0.5rem" }} /> 
+            {email}
           </Typography>
         </CardContent>
       </CardContent>

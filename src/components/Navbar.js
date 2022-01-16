@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -50,9 +49,6 @@ const Navbar = () => {
     navigate('/')
   }
 
-  console.log(currentUser)
-
- 
 
   return (
     <Box >
@@ -69,7 +65,7 @@ const Navbar = () => {
             <Avatar sx={{backgroundColor:'#fff', color:'#24292E' }}><HomeOutlinedIcon onClick={() =>navigate('/')}/></Avatar>
           </IconButton>
           <Typography position="static" onClick={() =>navigate('/')} variant="h6" component="div" sx={{cursor:'pointer'}}>
-            Fire Blog
+            Papbu | <span style={{fontSize:'smaller'}}>Sunday Magazine</span> 
           </Typography>
           <Box>{(currentUser)? (
             <div style={{display:'flex', alignItems:'center'}}>

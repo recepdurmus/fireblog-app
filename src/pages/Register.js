@@ -35,7 +35,6 @@ const Schema = Yup.object().shape({
 
 const Register = () => {
   const navigate = useNavigate();
-  // const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -46,7 +45,6 @@ const Register = () => {
     },
     validationSchema: Schema,
     onSubmit: async (values) => {
-      // setLoading(true);
       try {
         let user = await createUserWithEmailAndPassword(
           auth,
@@ -69,7 +67,7 @@ const Register = () => {
     <Container
       sx={{
         marginTop: "2rem",
-        height: "calc(95vh - 1rem)",
+        height: "calc(85vh - 1rem)",
         bgcolor: "background.paper",
         boxShadow: 1,
         borderRadius: 2,
@@ -81,7 +79,7 @@ const Register = () => {
       <Avatar
         sx={{
           margin: "1rem auto",
-          bgcolor: "primary.main",
+          bgcolor: "#4CAF50",
         }}
       >
         <PersonAddAltOutlined />
@@ -155,7 +153,7 @@ const Register = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Button fullWidth item variant="contained" type="submit">
+                <Button sx={{backgroundColor:'#4CAF50'}} fullWidth item variant="contained" type="submit">
                   Register
                 </Button>
               </Grid>
