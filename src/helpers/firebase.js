@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getDatabase, ref, set, push, onValue, query } from "firebase/database";
-import { useState, useEffect } from "react";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getDatabase } from "firebase/database";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJUq9egwp-vTbBtT1csjh_SGhWJbKDN_k",
@@ -13,39 +13,14 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
 export const auth = getAuth(app);
 
-export const AddNewBlog = (values) => {
-  const db = getDatabase();
-  const userRef = ref(db, "contact");
-  const newUserRef = push(userRef);
-  set(newUserRef, {
-    title: values.title,
-    imgUrl: values.imgUrl,
-    content: values.content,
-    email: values.email,
-  });
-};
+const database = getDatabase();
+export { database };
 
-export const useFetch = () => {
-  const [isLoading, setisLoading] = useState();
-  const [cardList, setcardList] = useState();
+export const db = getFirestore();
 
-  useEffect(() => {
-    setisLoading(true);
-    const db = getDatabase();
-    const userRef = ref(db, "contact");
 
-    onValue(query(userRef), (snapshot) => {
-      const cards = snapshot.val();
-      const cardsArray = [];
-      for (let id in cards) {
-        cardsArray.push({ id, ...cards[id] });
-      }
-      setcardList(cardsArray);
-    });
-  }, []);
+const provider = new GoogleAuthProvider();
+export { provider };
 
-  return { cardList };
-};

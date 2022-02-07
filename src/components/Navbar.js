@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContextProvider';
 import { signOut } from 'firebase/auth';
 import { auth } from '../helpers/firebase';
 import { Avatar } from '@mui/material';
@@ -49,7 +49,7 @@ const Navbar = () => {
     navigate('/')
   }
 
-  console.log(currentUser)
+  // console.log(currentUser)
 
 
   return (
@@ -64,10 +64,10 @@ const Navbar = () => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <Avatar sx={{backgroundColor:'#fff', color:'#24292E' }}><HomeOutlinedIcon onClick={() =>navigate('/')}/></Avatar>
+            <Avatar sx={{backgroundColor:'#fff', color:'#4CAF50' }}><HomeOutlinedIcon onClick={() =>navigate('/')}/></Avatar>
           </IconButton>
-          <Typography position="static" onClick={() =>navigate('/')} variant="h6" component="div" sx={{cursor:'pointer'}}>
-            Papbu | <span style={{fontSize:'smaller'}}>Sunday Magazine</span> 
+          <Typography position="static" onClick={() =>navigate('/')} variant="h6" component="div" sx={{cursor:'pointer', color:'#4CAF50'}}>
+            Papbu | <span style={{fontSize:'smaller', color:'#fff'}}>Sunday Magazine</span> 
           </Typography>
           <Box>{(currentUser)? (
             <div style={{display:'flex', alignItems:'center'}}>
@@ -79,7 +79,7 @@ const Navbar = () => {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <Avatar sx={{backgroundColor:'#fff', color:'#24292E' }}>
+                <Avatar sx={{backgroundColor:'#fff', color:'#4CAF50' }}>
                 {(currentUser.displayName)?.split(" ").map(str => str[0]).join("").toUpperCase()}
                 </Avatar>
               </IconButton>
@@ -113,7 +113,7 @@ const Navbar = () => {
               onClick={handleMenu}
               color="inherit"
             >
-              <Avatar sx={{backgroundColor:'#fff', color:'#24292E' }}><LoginTwoToneIcon/></Avatar>
+              <Avatar sx={{backgroundColor:'#fff', color:'#4CAF50' }}><LoginTwoToneIcon/></Avatar>
             </IconButton>
             <Menu
               id="menu-appbar"

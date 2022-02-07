@@ -11,8 +11,10 @@ import {
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
 import { auth } from "../helpers/firebase";
+import googleIcon from "../assets/gfavicon.png";
+
 
 const Schema = Yup.object().shape({
   username: Yup.string()
@@ -35,6 +37,21 @@ const Schema = Yup.object().shape({
 
 const Register = () => {
   const navigate = useNavigate();
+
+  const signInWithGoogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
+          navigate("/");
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    } catch (err) {alert(err.message)}
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -154,6 +171,29 @@ const Register = () => {
               <Grid item xs={12}>
                 <Button sx={{backgroundColor:'#4CAF50'}} fullWidth item variant="contained" type="submit">
                   Register
+                </Button>
+                <Button
+                  sx={{
+                    marginTop:"0.5rem",
+                    backgroundColor: "#fff",
+                    marginBottom: "1rem",
+                    color: "gray",
+                    ":hover": {
+                      bgcolor: "gray",
+                      color: "white",
+                    },
+                  }}
+                  fullWidth
+                  item
+                  variant="contained"
+                  onClick={signInWithGoogle}
+                >
+                  <img
+                    style={{ width: "1rem", marginRight: "1rem" }}
+                    src={googleIcon}
+                    alt="googleIcon"
+                  />
+                  Sign in with Google
                 </Button>
               </Grid>
             </Grid>

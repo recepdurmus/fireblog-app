@@ -9,10 +9,13 @@ import {
 } from "@mui/material";
 import { Formik, useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { AddNewBlog } from "../helpers/firebase";
-import { AuthContext } from "../context/AuthContext";
+import { AddNewBlog } from "../helpers/functions";
+import { AuthContext } from "../context/AuthContextProvider";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import { date } from "yup";
+
+
+
 
 
 const NewBlog = () => {
